@@ -1,0 +1,28 @@
+﻿Web Lab 3 – AES Modes on Images (Towhid)
+
+1) Environment
+   - OS: Windows + PowerShell
+   - OpenSSL: Win64 build
+   - Working dir: E:\Alll\4-1\Lab Manual - 3
+
+2) Files produced
+   - Original: pic_original.bmp
+   - Split: header.bin (54 bytes), body.bin
+   - Keys: key.hex (AES-128 key, hex), iv.hex (IV, hex)
+   - Encrypted bodies: body_ecb.bin / body_cfb.bin / body_ofb.bin
+   - Corrupted bodies: body_*_corrupted.bin (1-byte at offset 1000 XOR FF)
+   - Rebuilt images: image_* (original + corrupted)
+   - Diff summaries: *_diff_summary.csv (first-diff offsets & per-block tallies)
+
+3) Observations (what to check)
+   - Headers (first 54 bytes) remain identical between original & corrupted images.
+   - ECB: corruption shows as well-localized block artifacts in image.
+   - CFB/OFB: corruption spreads stream-wise in ciphertext → visible streak/noise.
+   - Hashes of bodies (original vs corrupted) differ, as expected.
+
+4) Reproduce quickly
+   - Use files listed above + run Task7_Verification.txt (hash/header checks).
+   - Open image_*.bmp and compare with image_*_corrupted.bmp visually.
+
+Author: Towhid
+Date  : 2025-11-09
